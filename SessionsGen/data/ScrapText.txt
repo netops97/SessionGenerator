@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace SessionsGen
+{
+    class Program
+    {
+        class SessionData 
+        {
+            static string ArrayOfSessionDataOpen = "<ArrayOfSessionData ";
+            static string xmlns1 = "xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ";
+            static string xmlns2 = "xmlns:xsd='http://www.w3.org/2001/XMLSchema' ";
+
+            static string hostName = "";
+
+            static string RowOpen = "<SessionData ";
+            static string SessionId = "SessionId=" + hostName;
+            static string SessionName = "SessionName=" + hostName;
+            static string ImageKey = " ImageKey='computer' ";
+            static string Host = "Host=" + "192.168.0.40";
+            static string Port = "Port=" + "22" ;
+            static string Proto = "Proto=" + "SSH ";
+            static string PuttySession = "PuttySession=" + "Default Settings" + " ";
+            static string Username = "Username=" + "bob";
+            static string ExtraArgs = "ExtraArgs=" + "-pw Fly2Mars";
+            static string SPSLFileName = "SPSLFileName=" + "";
+            static string RowClose = "/>" + "\n";
+
+            static string ArrayOfSessionDataEnd = "> \n";
+        }
+
+        static void Main(string[] args)
+        {
+            // Create a temporary file, and put some data into it.
+            //string path = Path.GetTempFileName();
+            string path = @"C:\Users\Dragon\Documents\Visual Studio 2017\Projects\SessionsGen\SessionsGen\SiteList.txt";
+            using (FileStream fs = File.Open(path, FileMode.Open, FileAccess.Write, FileShare.None))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes("This is some text in the file.\n");
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
+
+            SessionData session = new SessionData();
+
+
+
+
+            // Open the stream and read it back.
+            using (FileStream fs = File.Open(path, FileMode.Open))
+            {
+                byte[] b = new byte[1024];
+                UTF8Encoding temp = new UTF8Encoding(true);
+
+                while (fs.Read(b, 0, b.Length) > 0)
+                {
+                    Console.WriteLine(temp.GetString(b));
+                }
+            }
+        }
+    }
+}
