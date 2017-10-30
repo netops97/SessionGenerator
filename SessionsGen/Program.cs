@@ -11,6 +11,9 @@ namespace SessionsGen
     // SessionsGen generates "well formed" XML files that can be imported by
     // SuperPutty to create a large number (<500) of putty sessions quickly. 
     // These sessions can then be used to monitor large (or small) outages.
+    //
+    // Author: Bob Paye
+    // Change #1
 
 
     class Program
@@ -18,6 +21,7 @@ namespace SessionsGen
         public static string[] tempStore;
         public static string ticket;
 
+        // session data class declaration
         public class SessionData 
         {
             public static string hostName = "";
@@ -48,10 +52,15 @@ namespace SessionsGen
             //string pathX = @"C:\Sessions\SiteList.txt";
             //string pathZ = @"C:\Sessions\sessions.xml";
 
+            // Get the input and output files on the desktop
+            // Get path to SiteList.txt file on desktop
             string desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            // Add Sitelist.txt filename to desktop path
             string pathX = System.IO.Path.Combine(desktop1, "SiteList.txt");
 
+            // Get path to sessions.XML file on desktop
             string desktop2 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            // Add filename (sessions.XML) to desktop path
             string pathZ = System.IO.Path.Combine(desktop2, "sessions.XML");
             
             string[] rowArray = new string[500];
@@ -66,7 +75,7 @@ namespace SessionsGen
                 Console.Write("Ticket number please... ");
                 ticket = Console.ReadLine();
 
-                // Open the text file (pathX) using a stream reader.
+                // Open the SitePath.txt text file (pathX) using a stream reader.
                 using (StreamReader sr = new StreamReader(pathX))
                 {
                     String line;
@@ -122,7 +131,7 @@ namespace SessionsGen
                 Console.WriteLine(e.Message);
             }
 
-            // Create a file (using pathZ) and write the session data in tempStore to it.
+            // Create a sessions.XML file (using pathZ) and write the session data (in variable tempStore) to it.
             try
             {
                 string ArrayOfSessionDataOpen = "<ArrayOfSessionData ";
