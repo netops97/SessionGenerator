@@ -91,8 +91,8 @@ namespace SessionsGen
 
                         rowArray[index] = row;
 
-                    //Console.WriteLine(row);
-                    //Console.WriteLine(index);
+                    // Console.WriteLine(row);
+                    // Console.WriteLine(index);
 
                     index = index + 1;
                     }
@@ -109,7 +109,7 @@ namespace SessionsGen
                         //Console.WriteLine(index);
                     }
                     
-                    //Display how many sessions created
+                    // Display how many sessions created
                     Console.Write("Sessions created: ");
                     Console.WriteLine(index-1);
                    
